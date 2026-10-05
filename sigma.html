@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface de Autenticação Acadêmica</title>
+    <style>
+        /* Configurações Globais e Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #000000;
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Barra de Navegação Superior */
+        .navbar {
+            background-color: #121212;
+            /* Tom de cinza escuro extraído da imagem */
+            width: 100%;
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            font-size: 1.1rem;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            color: #FFFFFF;
+        }
+
+        /* Container Centralizado para o Card */
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Card de Login */
+        .auth-container {
+            background-color: #1a1a1a;
+            width: 100%;
+            max-width: 460px;
+            padding: 50px 40px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Seção de Título */
+        .auth-header h1 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .auth-header p {
+            color: #8c8c8c;
+            font-size: 0.95rem;
+            margin-bottom: 35px;
+        }
+
+        /* Formulário e Campos de Entrada */
+        .form-group {
+            position: relative;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.75rem;
+            color: #2f80ed;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .form-group input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #2f80ed;
+            color: #FFFFFF;
+            padding: 8px 0;
+            font-size: 1.05rem;
+            outline: none;
+        }
+
+        /* Bloco de Opções (Lembrar meu ID) - Totalmente Estático */
+        .options-group {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+            color: #666666;
+            cursor: default;
+            /* Mantém a seta padrão do mouse, sem ícone de bloqueio */
+            pointer-events: none;
+            /* Desativa completamente a capacidade de clique ou foco */
+        }
+
+        .options-group input[type="checkbox"] {
+            margin-right: 8px;
+            cursor: default;
+        }
+
+        .options-group label {
+            cursor: default;
+        }
+
+        /* Botão Principal com Animações Ativas */
+        .btn-submit {
+            width: 100%;
+            background-color: #0d59c6;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 30px;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        /* Animação ao passar o mouse */
+        .btn-submit:hover {
+            background-color: #0b4aa5;
+        }
+
+        /* Animação ao clicar (efeito de clique físico) */
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+
+        /* Links de Suporte (Sem efeitos de hover ou animação) */
+        .helper-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .helper-links a {
+            color: #FFFFFF;
+            font-size: 0.9rem;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: default;
+        }
+
+        /* Linha Divisória */
+        .divider-line {
+            height: 1px;
+            background-color: #2d2d2d;
+            margin: 25px 0;
+        }
+
+        /* Botões de Provedores Estáticos (Sem hover ou animações) */
+        .btn-oauth {
+            width: 100%;
+            background-color: #333333;
+            color: #FFFFFF;
+            border: 1px solid #444444;
+            border-radius: 30px;
+            padding: 14px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: default;
+        }
+
+        .icon-placeholder {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: #FFFFFF;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Barra de Navegação -->
+    <nav class="navbar">
+        <span class="navbar-brand">Samsung</span>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <div class="main-content">
+        <div class="auth-container">
+
+            <header class="auth-header">
+                <h1>Uma conta. Qualquer dispositivo.</h1>
+                <p>Entre para acessar seus serviços.</p>
+            </header>
+
+            <form action="javascript:void(0);">
+                <div class="form-group">
+                    <label for="user-identifier">Endereço de e-mail ou ID</label>
+                    <input type="text" id="user-identifier" autocomplete="off">
+                </div>
+
+                <!-- O container agora impede interações físicas por completo -->
+                <div class="options-group">
+                    <input type="checkbox" id="remember-me">
+                    <label for="remember-me">Lembrar meu ID</label>
+                </div>
+
+                <button type="submit" class="btn-submit">Continuar</button>
+            </form>
+
+            <div class="helper-links">
+                <a href="javascript:void(0);">Localizar credenciais</a>
+                <a href="javascript:void(0);">Criar uma nova conta</a>
+            </div>
+
+            <div class="divider-line"></div>
+
+            <button type="button" class="btn-oauth">
+                <span class="icon-placeholder"></span>
+                Acessar com Provedor Global
+            </button>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
